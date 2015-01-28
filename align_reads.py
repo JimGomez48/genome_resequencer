@@ -15,21 +15,6 @@ def parse_args():
          'reads_file',
          type=str,
          help='the file containing reads from the donor genome')
-    # arg_parser.add_argument(
-    #     '-g', '--genome-name',
-    #     metavar='CHOICE',
-    #     required=False,
-    #     type=int,
-    #     choices=range(1, 4),
-    #     default=1,
-    #     help='(1) hw2_grad (2) practice_E_1 (3) practice_W_3. Default: 1')
-    # arg_parser.add_argument(
-    #     '-m', '--max-mismatch',
-    #     metavar='NUM',
-    #     required=False,
-    #     type=int,
-    #     default=2,
-    #     help='max number of mismatches allowed per read. Default: 2')
     arg_parser.add_argument(
         '-t', '--trivial-align',
         required=False,
@@ -49,7 +34,6 @@ def print_args(args):
         print 'using index:\tFALSE'
     else:
         print 'using index:\tTRUE'
-    # print 'max-mismatch:\t' + str(args.max_mismatch)
     print '=========================================='
 
 

@@ -16,14 +16,6 @@ def __parse_args():
          'cons_file',
          type=str,
          help='the file containing the consensus donor genome')
-    # arg_parser.add_argument(
-    #     '-g', '--genome-name',
-    #     metavar='CHOICE',
-    #     required=False,
-    #     type=int,
-    #     choices=range(1, 4),
-    #     default=1,
-    #     help='(1) hw2_grad (2) practice_E_1 (3) practice_W_3. Default: 1')
     arg_parser.add_argument(
         '-e', '--edit-dist',
         metavar='STRATEGY',
@@ -197,10 +189,6 @@ def __main():
     args = __parse_args()
 
     # get the ref and consensus file paths
-    # genome_name = cm.get_genome_name(args.genome_name)
-    # ref_file = cm.REFS_DIR + cm.REF_PRE + genome_name + '.txt'
-    # cons_file = cm.CONS_DIR + cm.CONS_PRE+ genome_name + '.txt'
-
     ref_file = args.ref_file
     cons_file = args.cons_file
 
