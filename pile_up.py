@@ -1,6 +1,5 @@
 import argparse
 import numpy as np
-import sys
 import common as cm
 
 
@@ -31,7 +30,7 @@ def __print_args(args):
 
 
 def __get_consensus(ref, ref_name, align_file):
-    print '\tGetting consensus genome...'
+    print 'Generating pile-up...'
     index_allele_map = ['A', 'C', 'G', 'T']
     allele_index_map = {
         'A': 0,
@@ -77,8 +76,10 @@ def __get_consensus(ref, ref_name, align_file):
             line_count += 1.0
             progress = line_count / num_lines
             cm.print_progress(progress)
-    print
+    cm.print_progress(1)
+    print '\tComplete'
     # get consensus string from pileup
+    print 'Resolving consensus donor...'
     consensus_file_name = cm.CONS_DIR + cm.CONS_PRE + ref_name + '.txt'
     with open(consensus_file_name, 'w') as consensus_file:
         consensus_file.write('>' + ref_name + '\n')
@@ -93,12 +94,13 @@ def __get_consensus(ref, ref_name, align_file):
                 consensus_file.write(index_allele_map[max_pos])
             else:  # otherwise, stick with the ref allele (too much ambiguity)
                 consensus_file.write(ref[i])
+            cm.print_progress(float(i) / float(len(consensus_pile)))
+    cm.print_progress(1)
     print '\tComplete'
     return consensus_file_name
 
 
 def pile_up(ref_genome, ref_name, align_file_name):
-    print 'Starting pile-up...'
     return __get_consensus(ref_genome, ref_name, align_file_name)
 
 

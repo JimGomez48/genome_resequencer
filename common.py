@@ -1,12 +1,12 @@
-import sys
-import math
+from sys import stdout
+from math import ceil
 
 
 REF_PRE = 'ref_'
 READS_PRE = 'reads_'
 DONOR_PRE = 'donor_'
 ANS_PRE = 'ans_'
-MYANS_PRE = 'myans_'
+MYANS_PRE = 'variants_'
 ALIGN_PRE = 'align_'
 CONS_PRE = 'cons_'
 
@@ -28,8 +28,8 @@ def print_progress(progress, msg='Progress'):
     :param msg: the progress message to prepend to the progress output
     """
     progress = min(100., progress * 100.)
-    sys.stdout.write("\t%s... [%.2f%%]\r" % (msg, progress))
-    sys.stdout.flush()
+    stdout.write("\t%s... [%.2f%%]\r" % (msg, progress))
+    stdout.flush()
 
 
 def load_genome(filename):
@@ -68,4 +68,4 @@ def compute_kmer_length(read_length, max_mismatches):
         if read_length % num_segments == 0:
             break
         num_segments += 1
-    return int(math.ceil(float(read_length) / float(num_segments)))
+    return int(ceil(float(read_length) / float(num_segments)))

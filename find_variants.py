@@ -180,8 +180,9 @@ def find_variants(ref, ref_name, donor_file, edist_strategy='a'):
                         snps.append(
                             (ref_align[j], donor_align[j], i + j - offset))
         progress = float(i) / float(len(ref))
-        cm.print_progress(progress, 'searching')
-    print
+        cm.print_progress(progress, 'Searching')
+    cm.print_progress(1)
+    print '\tComplete'
     return __write_answer_file(ref_name, snps, inserts, deletes, edist_strategy)
 
 

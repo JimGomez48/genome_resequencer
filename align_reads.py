@@ -2,38 +2,41 @@ import argparse
 import numpy as np
 import common as cm
 
-def parse_args():
+def __parse_args():
     arg_parser = argparse.ArgumentParser(
         description="Aligns reads from a donor genome to a given reference "
-                    "genome. Produces an alignment file as output"
+                    "genome. Produces an alignment file 'align_*.txt' in the "
+                    "current working directory as output."
     )
     arg_parser.add_argument(
          'ref_file',
          type=str,
-         help='the file containing the reference genome')
+         help='The file containing the reference genome')
     arg_parser.add_argument(
          'reads_file',
          type=str,
-         help='the file containing reads from the donor genome')
+         help='The file containing reads from the donor genome')
     arg_parser.add_argument(
         '-t', '--trivial-align',
         required=False,
         action='store_true',
         default=False,
-        help='use the trivial algorithm to align reads to the reference')
+        help='Use the trivial alignment algorithm instead of the faster '
+             'hashtable-based alignment.'
+    )
     args = arg_parser.parse_args()
-    print_args(args)
+    __print_args(args)
     return args
 
 
-def print_args(args):
+def __print_args(args):
     print '=========================================='
     print 'ref-file:\t' + str(args.ref_file)
     print 'reads-file:\t' + str(args.reads_file)
     if args.trivial_align:
-        print 'using index:\tFALSE'
+        print 'using hashtable:\tFALSE'
     else:
-        print 'using index:\tTRUE'
+        print 'using hashtable:\tTRUE'
     print '=========================================='
 
 
@@ -122,8 +125,8 @@ def map_reads_forward(ref, ref_name, reads_file, k, trivial=False):
             outfile.write(read1 + ':' + str(best_pos_1) + ',' +
                           read2 + ':' + str(best_pos_2) + '\n')
             line_num += 1
-            # cm.print_progress(lin_num / 30000000.0)
             cm.print_progress(line_num / num_lines)
+    cm.print_progress(1)
     print '\tComplete'
     return align_file
 
@@ -165,13 +168,12 @@ def map_reads_inverted(ref, ref_name, reads_file, k):
                 outfile.write(read1 + ':' + str(best_pos1_r) + ',' +
                           read2 + ':' + str(best_pos2_r) + '\n')
         line_num += 1
-        # cm.print_progress(lin_num / 30000000.0)
         cm.print_progress(line_num / num_lines)
     print '\tComplete'
     return align_file
 
 
-def pretty_print_aligned_reads(ref, align_file):
+def __pretty_print_aligned_reads(ref, align_file):
     reads = []
     alignments = []
     # create list of spaced alignments and list of paired-read position tuples
@@ -235,7 +237,7 @@ def pretty_print_aligned_reads(ref, align_file):
 
 
 def main():
-    args = parse_args()
+    args = __parse_args()
 
     # get the ref and reads file paths
     ref_file = args.ref_file
@@ -249,7 +251,7 @@ def main():
     # map_reads_inverted(ref, ref_name, reads_file, k=10, trivial=args.trivial_align)
     map_reads_forward(ref, ref_name, reads_file, k=10, trivial=args.trivial_align)
 
-    # pretty_print_aligned_reads(ref, align_file)
+    # __pretty_print_aligned_reads(ref, align_file)
     print 'DONE'
 
 
