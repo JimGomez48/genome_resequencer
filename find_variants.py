@@ -47,7 +47,7 @@ def __print_args(args):
     elif args.edit_dist == 'g':
         print 'alignment:\tglobal'
     elif args.edit_dist == 'l':
-        print 'alignment:\local'
+        print 'alignment:\tlocal'
     print '=========================================='
 
 

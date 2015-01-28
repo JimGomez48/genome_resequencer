@@ -10,22 +10,15 @@ MYANS_PRE = 'myans_'
 ALIGN_PRE = 'align_'
 CONS_PRE = 'cons_'
 
-REFS_DIR = 'refs/'
-READS_DIR = 'reads/'
-DONORS_DIR = 'donors/'
-ANS_DIR = 'ans/'
-MYANS_DIR = 'myans/'
-ALIGN_DIR = 'alignments/'
-CONS_DIR = 'cons/'
+# REFS_DIR = 'refs/'
+# READS_DIR = 'reads/'
+# DONORS_DIR = 'donors/'
+# ANS_DIR = 'ans/'
+# MYANS_DIR = 'myans/'
+# ALIGN_DIR = 'alignments/'
+# CONS_DIR = 'cons/'
 
-
-def get_genome_name(choice):
-    names = {
-        1: 'hw2grad_M_1_chr_1',
-        2: 'practice_E_1_chr_1',
-        3: 'practice_W_3_chr_1',
-    }
-    return names[choice]
+REFS_DIR = READS_DIR = DONORS_DIR = ANS_DIR = MYANS_DIR = ALIGN_DIR = CONS_DIR = ''
 
 
 def print_progress(progress, msg='Progress'):

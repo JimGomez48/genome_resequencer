@@ -15,6 +15,7 @@ reads/
 refs/
 zips/
 lineups/
+*.txt
 
 # C extensions
 *.so
