@@ -10,13 +10,21 @@ def __parse_args():
                     "a reference genome from aligned reads."
     )
     arg_parser.add_argument(
-        '-g', '--genome-name',
-        metavar='CHOICE',
-        required=False,
-        type=int,
-        choices=range(1, 4),
-        default=1,
-        help='(1) hw2_grad (2) practice_E_1 (3) practice_W_3. Default: 1')
+         'ref_file',
+         type=str,
+         help='the file containing the reference genome')
+    arg_parser.add_argument(
+         'align_file',
+         type=str,
+         help='the file containing the aligned reads from the donor genome')
+    # arg_parser.add_argument(
+    #     '-g', '--genome-name',
+    #     metavar='CHOICE',
+    #     required=False,
+    #     type=int,
+    #     choices=range(1, 4),
+    #     default=1,
+    #     help='(1) hw2_grad (2) practice_E_1 (3) practice_W_3. Default: 1')
     args = arg_parser.parse_args()
     __print_args(args)
     return args
@@ -24,7 +32,9 @@ def __parse_args():
 
 def __print_args(args):
     print '=========================================='
-    print 'genome-name:\t' + str(cm.get_genome_name(args.genome_name))
+    # print 'genome-name:\t' + str(cm.get_genome_name(args.genome_name))
+    print 'ref-file:\t' + str(args.ref_file)
+    print 'align-file:\t' + str(args.align_file)
     print '=========================================='
 
 
@@ -130,17 +140,21 @@ def __main():
     args = __parse_args()
 
     # get the ref and consensus file paths
-    genome_name = cm.get_genome_name(args.genome_name)
-    ref_file = cm.REFS_DIR + cm.REF_PRE + genome_name + '.txt'
-    align_file = cm.ALIGN_DIR+ cm.ALIGN_PRE+ genome_name + '.txt'
+    # genome_name = cm.get_genome_name(args.genome_name)
+    # ref_file = cm.REFS_DIR + cm.REF_PRE + genome_name + '.txt'
+    # align_file = cm.ALIGN_DIR+ cm.ALIGN_PRE+ genome_name + '.txt'
+
+    # get the ref and consensus file paths
+    ref_file = args.ref_file
+    align_file = args.align_file
 
 
     ref, ref_name= cm.load_genome(ref_file)
 
-    # consensus_file = pile_up(ref, ref_name, align_file)
+    consensus_file = pile_up(ref, ref_name, align_file)
     # pretty_print_ref_consensus(ref, consensus_file)
 
-    pretty_print_ref_consensus(ref, 'cons/cons_hw2grad_M_1_chr_1.txt')
+    # pretty_print_ref_consensus(ref, 'cons/cons_hw2grad_M_1_chr_1.txt')
     # pretty_print_ref_consensus(ref, 'cons/cons_practice_E_1_chr_1.txt')
     # pretty_print_ref_consensus(ref, 'cons/cons_practice_W_3_chr_1.txt')
 

@@ -13,6 +13,8 @@ donors/
 myans/
 reads/
 refs/
+zips/
+lineups/
 
 # C extensions
 *.so

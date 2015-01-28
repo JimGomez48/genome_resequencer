@@ -9,16 +9,24 @@ def __parse_args():
                     "a reference genome."
     )
     arg_parser.add_argument(
-        '-g', '--genome-name',
-        metavar='CHOICE',
-        required=False,
-        type=int,
-        choices=range(1, 4),
-        default=1,
-        help='(1) hw2_grad (2) practice_E_1 (3) practice_W_3. Default: 1')
+         'ref_file',
+         type=str,
+         help='the file containing the reference genome')
+    arg_parser.add_argument(
+         'cons_file',
+         type=str,
+         help='the file containing the consensus donor genome')
+    # arg_parser.add_argument(
+    #     '-g', '--genome-name',
+    #     metavar='CHOICE',
+    #     required=False,
+    #     type=int,
+    #     choices=range(1, 4),
+    #     default=1,
+    #     help='(1) hw2_grad (2) practice_E_1 (3) practice_W_3. Default: 1')
     arg_parser.add_argument(
         '-e', '--edit-dist',
-        metavar='CHOICE',
+        metavar='STRATEGY',
         required=False,
         type=str,
         choices=['a', 'g', 'l'],
@@ -38,7 +46,9 @@ def __parse_args():
 
 def __print_args(args):
     print '=========================================='
-    print 'genome-name:\t' + str(cm.get_genome_name(args.genome_name))
+    # print 'genome-name:\t' + str(cm.get_genome_name(args.genome_name))
+    print 'ref-file:\t' + str(args.ref_file)
+    print 'cons-file:\t' + str(args.cons_file)
     # print 'snp-thresh:\t' + str(args.snp_thresh)
     if args.edit_dist == 'a':
         print 'alignment:\taffine-gap'
@@ -187,9 +197,12 @@ def __main():
     args = __parse_args()
 
     # get the ref and consensus file paths
-    genome_name = cm.get_genome_name(args.genome_name)
-    ref_file = cm.REFS_DIR + cm.REF_PRE + genome_name + '.txt'
-    cons_file = cm.CONS_DIR + cm.CONS_PRE+ genome_name + '.txt'
+    # genome_name = cm.get_genome_name(args.genome_name)
+    # ref_file = cm.REFS_DIR + cm.REF_PRE + genome_name + '.txt'
+    # cons_file = cm.CONS_DIR + cm.CONS_PRE+ genome_name + '.txt'
+
+    ref_file = args.ref_file
+    cons_file = args.cons_file
 
     print 'Loading ref-genome...'
     ref, ref_name = cm.load_genome(ref_file)
